@@ -1,6 +1,8 @@
 Revision history for IRC-Utils
 
 {{$NEXT}}
+
+0.04  Sat Apr 2 23:57:08 GMT 2011
     - Add numeric_to_name() and name_to_numeric() functions
 
 0.03  Sat Apr 2 22:30:42 GMT 2011
