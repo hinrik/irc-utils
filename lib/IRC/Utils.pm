@@ -227,7 +227,8 @@ sub matches_mask_array {
 
 sub matches_mask {
     my ($mask, $match, $mapping) = @_;
-    return if !defined $mask || !defined $match;
+    return if !defined $mask || !length $mask;
+    return if !defined $match || !length $match;
 
     $mask = parse_ban_mask($mask);
     $mask =~ s/\*+/*/g;

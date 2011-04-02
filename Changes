@@ -1,6 +1,7 @@
 Revision history for IRC-Utils
 
 {{$NEXT}}
+    - matches_mask(): Return nothing if mask/match parameters have no length
 
 0.01  Sat Apr 2 20:54:37 GMT 2011
     - Initial release. Combines most things from POE::Component::IRC::Common
