@@ -33,7 +33,7 @@ my $hashref3 = parse_mode_line(qw(+b -b!*@*));
 is($hashref3->{modes}->[0], '+b', 'Parse mode test 5');
 is($hashref3->{args}->[0], '-b!*@*', 'Parse mode test 6');
 
-my $banmask = parse_ban_mask('stalin*');
+my $banmask = parse_mask('stalin*');
 my $match = 'stalin!joe@kremlin.ru';
 my $no_match = 'BinGOs!foo@blah.com';
 is($banmask, 'stalin*!*@*', 'Parse ban mask test');

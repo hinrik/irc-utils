@@ -9,7 +9,7 @@ use Encode::Guess;
 require Exporter;
 use base qw(Exporter);
 our @EXPORT_OK = qw(
-    u_irc l_irc parse_mode_line parse_ban_mask matches_mask matches_mask_array
+    u_irc l_irc parse_mode_line parse_mask matches_mask matches_mask_array
     unparse_mode_line gen_mode_change parse_user is_valid_nick_name decode_irc
     is_valid_chan_name has_color has_formatting strip_color strip_formatting
     NORMAL BOLD UNDERLINE REVERSE ITALIC FIXED WHITE BLACK BLUE GREEN RED
@@ -132,29 +132,28 @@ sub parse_mode_line {
     return $hashref;
 }
 
-sub parse_ban_mask {
+sub parse_mask {
     my ($arg) = @_;
     return if !defined $arg;
 
     $arg =~ s/\*{2,}/*/g;
-    my @ban;
+    my @mask;
     my $remainder;
     if ($arg !~ /!/ and $arg =~ /@/) {
         $remainder = $arg;
     }
     else {
-        ($ban[0], $remainder) = split /!/, $arg, 2;
+        ($mask[0], $remainder) = split /!/, $arg, 2;
     }
 
     $remainder =~ s/!//g if defined $remainder;
-    @ban[1..2] = split(/@/, $remainder, 2) if defined $remainder;
-    $ban[2] =~ s/@//g if defined $ban[2];
+    @mask[1..2] = split(/@/, $remainder, 2) if defined $remainder;
+    $mask[2] =~ s/@//g if defined $mask[2];
 
     for my $i (1..2) {
-        $ban[$i] = '*' if !$ban[$i];
+        $mask[$i] = '*' if !$mask[$i];
     }
-
-    return $ban[0] . '!' . $ban[1] . '@' . $ban[2];
+    return $mask[0] . '!' . $mask[1] . '@' . $mask[2];
 }
 
 sub unparse_mode_line {
@@ -230,7 +229,7 @@ sub matches_mask {
     return if !defined $mask || !length $mask;
     return if !defined $match || !length $match;
 
-    $mask = parse_ban_mask($mask);
+    $mask = parse_mask($mask);
     $mask =~ s/\*+/*/g;
 
     my $umask = quotemeta u_irc($mask, $mapping);
@@ -348,7 +347,7 @@ IRC::Utils - Common utilities for IRC-related tasks
  my $hashref = parse_mode_line($mode_line);
 
  my $banmask = 'stalin*';
- my $full_banmask = parse_ban_mask($banmask);
+ my $full_banmask = parse_mask($banmask);
 
  if (matches_mask($full_banmask, 'stalin!joe@kremlin.ru')) {
      print "EEK!";
@@ -408,21 +407,21 @@ Example:
     args  => [ 'Bob', 'sue', 'stalin*!*@*' ],
  }
 
-=head2 C<parse_ban_mask>
+=head2 C<parse_mask>
 
-Takes one parameter, a string representing an IRC ban mask. Returns a
-normalised full banmask.
+Takes one parameter, a string representing an IRC mask. Returns a normalised
+full mask.
 
 Example:
 
- $fullbanmask = parse_ban_mask( 'stalin*' );
+ $fullbanmask = parse_mask( 'stalin*' );
 
  # $fullbanmask will be: 'stalin*!*@*';
 
 =head2 C<matches_mask>
 
 Takes two parameters, a string representing an IRC mask (it'll be processed
-with L<C<parse_ban_mask>|/parse_ban_mask> to ensure that it is normalised)
+with L<C<parse_mask>|/parse_mask> to ensure that it is normalised)
 and something to match against the IRC mask, such as a nick!user@hostname
 string. Returns a true value if they match, a false value otherwise.
 Optionally, one may pass the casemapping (see L<C<u_irc>|/u_irc>), as this
