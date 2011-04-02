@@ -1,6 +1,8 @@
 Revision history for IRC-Utils
 
 {{$NEXT}}
+
+0.01  Sat Apr 2 20:54:37 GMT 2011
     - Initial release. Combines most things from POE::Component::IRC::Common
       and POE::Component::Server::IRC::Common. I gave some of the functions better
       names and changed some of the color name constants to better match the
