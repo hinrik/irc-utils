@@ -2,7 +2,7 @@ use strict;
 use warnings FATAL => 'all';
 use Encode qw(encode);
 use IRC::Utils qw(:ALL);
-use Test::More tests => 39;
+use Test::More tests => 41;
 
 is('SIMPLE', u_irc('simple'), 'Upper simple test');
 is('simple', l_irc('SIMPLE'), 'Lower simple test');
@@ -68,3 +68,6 @@ my $cp1252_bytes = encode('cp1252', $string);
 my $utf8_bytes = encode('utf8', $string);
 is(decode_irc($cp1252_bytes), $string, 'decode_irc() works for CP1252 text');
 is(decode_irc($utf8_bytes), $string, 'decode_irc() works for UTF-8 text');
+
+is(numeric_to_name('001'), 'RPL_WELCOME', 'RFC name 001 is correct');
+is(name_to_numeric('RPL_MYINFO'), '004', 'RFC code 004 is correct');

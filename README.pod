@@ -142,6 +142,16 @@ characters of allowed channel prefixes. Defaults to C<['#', '&']>.
 Takes one argument, a nickname to validate. Returns true or false if the
 nickname is valid or not.
 
+=head2 C<numeric_to_name>
+
+Takes an IRC server numerical reply code (e.g. '001') as an argument, and
+returns the corresponding name (e.g. 'RPL_WELCOME').
+
+=head2 C<name_to_numeric>
+
+Takes an IRC server reply name (e.g. 'RPL_WELCOME') as an argument, and returns the
+corresponding numerical code (e.g. '001').
+
 =head2 C<has_color>
 
 Takes one parameter, a string of IRC text. Returns true if it contains any IRC

@@ -1,6 +1,7 @@
 Revision history for IRC-Utils
 
 {{$NEXT}}
+    - Add numeric_to_name() and name_to_numeric() functions
 
 0.03  Sat Apr 2 22:30:42 GMT 2011
     - Rename parse_ban_mask() to parse_mask()
