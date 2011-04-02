@@ -1,6 +1,8 @@
 Revision history for IRC-Utils
 
 {{$NEXT}}
+
+0.02  Sat Apr 2 21:22:02 GMT 2011
     - matches_mask(): Return nothing if mask/match parameters have no length
 
 0.01  Sat Apr 2 20:54:37 GMT 2011
