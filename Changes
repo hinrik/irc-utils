@@ -1,0 +1,7 @@
+Revision history for IRC-Utils
+
+{{$NEXT}}
+    - Initial release. Combines most things from POE::Component::IRC::Common
+      and POE::Component::Server::IRC::Common. I gave some of the functions better
+      names and changed some of the color name constants to better match the
+      'standard' names in use.
