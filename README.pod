@@ -61,7 +61,12 @@ lowercase equivalent of the passed string.
 
 =head2 C<parse_mode_line>
 
-Takes a list representing an IRC mode line. Returns a hashref. If the modeline
+Takes a list representing an IRC mode line. Returns a hashref. Optionally
+you can also supply an arrayref and a hashref to specify valid channel
+modes (default: C<[qw(beI k l imnpstaqr)]>) and status modes (default:
+C<< {o => '@', h => '%', v => '+'} >>), respectively.
+
+If the modeline
 couldn't be parsed the hashref will be empty. On success the following keys
 will be available in the hashref:
 

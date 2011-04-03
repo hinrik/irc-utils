@@ -2,6 +2,7 @@ Revision history for IRC-Utils
 
 {{$NEXT}}
     - Add support for the blink formatting code
+    - Document chanmode and statmode parameters to parse_mode_line()
 
 0.05  Sun Apr 3 00:17:00 GMT 2011
     - Rename l_irc() and u_irc() to the more descriptive lc_irc and uc_irc()
