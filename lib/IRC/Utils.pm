@@ -9,7 +9,7 @@ use Encode::Guess;
 require Exporter;
 use base qw(Exporter);
 our @EXPORT_OK = qw(
-    u_irc l_irc parse_mode_line parse_mask matches_mask matches_mask_array
+    uc_irc lc_irc parse_mode_line parse_mask matches_mask matches_mask_array
     unparse_mode_line gen_mode_change parse_user is_valid_nick_name decode_irc
     is_valid_chan_name has_color has_formatting strip_color strip_formatting
     NORMAL BOLD UNDERLINE REVERSE ITALIC FIXED WHITE BLACK BLUE GREEN RED
@@ -208,7 +208,7 @@ sub name_to_numeric {
    return $NAME2NUMERIC{$name};
 }
 
-sub u_irc {
+sub uc_irc {
     my ($value, $type) = @_;
     return if !defined $value;
     $type = 'rfc1459' if !defined $type;
@@ -227,7 +227,7 @@ sub u_irc {
     return $value;
 }
 
-sub l_irc {
+sub lc_irc {
     my ($value, $type) = @_;
     return if !defined $value;
     $type = 'rfc1459' if !defined $type;
@@ -392,10 +392,10 @@ sub matches_mask {
     $mask = parse_mask($mask);
     $mask =~ s/\*+/*/g;
 
-    my $umask = quotemeta u_irc($mask, $mapping);
+    my $umask = quotemeta uc_irc($mask, $mapping);
     $umask =~ s/\\\*/[\x01-\xFF]{0,}/g;
     $umask =~ s/\\\?/[\x01-\xFF]{1,1}/g;
-    $match = u_irc($match, $mapping);
+    $match = uc_irc($match, $mapping);
 
     return 1 if $match =~ /^$umask$/;
     return;
@@ -500,8 +500,8 @@ IRC::Utils - Common utilities for IRC-related tasks
  use IRC::Utils ':ALL';
 
  my $nickname = '^Lame|BOT[moo]';
- my $uppercase_nick = u_irc($nickname);
- my $lowercase_nick = l_irc($nickname);
+ my $uppercase_nick = uc_irc($nickname);
+ my $lowercase_nick = lc_irc($nickname);
 
  my $mode_line = 'ov+b-i Bob sue stalin*!*@*';
  my $hashref = parse_mode_line($mode_line);
@@ -533,14 +533,14 @@ formatting, etc.
 
 =head1 FUNCTIONS
 
-=head2 C<u_irc>
+=head2 C<uc_irc>
 
 Takes one mandatory parameter, a string to convert to IRC uppercase, and one
 optional parameter, the casemapping of the ircd (which can be B<'rfc1459'>,
 B<'strict-rfc1459'> or B<'ascii'>. Default is B<'rfc1459'>). Returns the IRC
 uppercase equivalent of the passed string.
 
-=head2 C<l_irc>
+=head2 C<lc_irc>
 
 Takes one mandatory parameter, a string to convert to IRC lowercase, and one
 optional parameter, the casemapping of the ircd (which can be B<'rfc1459'>,
@@ -584,8 +584,8 @@ Takes two parameters, a string representing an IRC mask (it'll be processed
 with L<C<parse_mask>|/parse_mask> to ensure that it is normalised)
 and something to match against the IRC mask, such as a nick!user@hostname
 string. Returns a true value if they match, a false value otherwise.
-Optionally, one may pass the casemapping (see L<C<u_irc>|/u_irc>), as this
-function uses C<u_irc> internally.
+Optionally, one may pass the casemapping (see L<C<uc_irc>|/uc_irc>), as this
+function uses C<uc_irc> internally.
 
 =head2 C<matches_mask_array>
 
@@ -593,8 +593,8 @@ Takes two array references, the first being a list of strings representing
 IRC masks, the second a list of somethings to test against the masks. Returns
 an empty hashref if there are no matches. Otherwise, the keys will be the
 masks matched, each value being an arrayref of the strings that matched it.
-Optionally, one may pass the casemapping (see L<C<u_irc>|/u_irc>), as
-this function uses C<u_irc> internally.
+Optionally, one may pass the casemapping (see L<C<uc_irc>|/uc_irc>), as
+this function uses C<uc_irc> internally.
 
 =head2 C<unparse_mode_line>
 

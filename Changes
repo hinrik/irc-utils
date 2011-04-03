@@ -1,6 +1,7 @@
 Revision history for IRC-Utils
 
 {{$NEXT}}
+    - Rename l_irc() and u_irc() to the more descriptive lc_irc and uc_irc()
 
 0.04  Sat Apr 2 23:57:08 GMT 2011
     - Add numeric_to_name() and name_to_numeric() functions

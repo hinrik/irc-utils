@@ -4,14 +4,14 @@ use Encode qw(encode);
 use IRC::Utils qw(:ALL);
 use Test::More tests => 41;
 
-is('SIMPLE', u_irc('simple'), 'Upper simple test');
-is('simple', l_irc('SIMPLE'), 'Lower simple test');
-is('C0MPL~[X]', u_irc('c0mpl^{x}'), 'Upper complex test');
-is('c0mpl^{x}', l_irc('C0MPL~[X]'), 'Lower complex test');
-is('C0MPL~[X]', u_irc('c0mpl~[x]', 'ascii'), 'Upper complex test ascii');
-is('c0mpl^{x}', l_irc('C0MPL^{X}', 'ascii'), 'Lower complex test ascii');
-is('C0MPL~[X]', u_irc('c0mpl~{x}', 'strict-rfc1459'), 'Upper complex test strict');
-is('c0mpl^{x}', l_irc('C0MPL^[X]', 'strict-rfc1459'), 'Lower complex test strict');
+is('SIMPLE', uc_irc('simple'), 'Upper simple test');
+is('simple', lc_irc('SIMPLE'), 'Lower simple test');
+is('C0MPL~[X]', uc_irc('c0mpl^{x}'), 'Upper complex test');
+is('c0mpl^{x}', lc_irc('C0MPL~[X]'), 'Lower complex test');
+is('C0MPL~[X]', uc_irc('c0mpl~[x]', 'ascii'), 'Upper complex test ascii');
+is('c0mpl^{x}', lc_irc('C0MPL^{X}', 'ascii'), 'Lower complex test ascii');
+is('C0MPL~[X]', uc_irc('c0mpl~{x}', 'strict-rfc1459'), 'Upper complex test strict');
+is('c0mpl^{x}', lc_irc('C0MPL^[X]', 'strict-rfc1459'), 'Lower complex test strict');
 
 ok(is_valid_nick_name( 'm00[^]' ), 'Nickname is valid test');
 ok(!is_valid_nick_name( 'm00[=]' ), 'Nickname is invalid test');
