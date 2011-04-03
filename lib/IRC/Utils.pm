@@ -351,7 +351,7 @@ sub gen_mode_change {
 sub is_valid_nick_name {
     my ($nickname) = @_;
     return if !defined $nickname || !length $nickname;
-    return 1 if $nickname =~ /^[A-Za-z_0-9`\-^\|\\\{}\[\]]+$/;
+    return 1 if $nickname =~ /^[A-Za-z_`\-^\|\\\{}\[\]][A-Za-z_0-9`\-^\|\\\{}\[\]]*$/;
     return;
 }
 
