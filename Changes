@@ -1,6 +1,8 @@
 Revision history for IRC-Utils
 
 {{$NEXT}}
+
+0.06  Sun Apr 3 02:51:37 GMT 2011
     - Add support for the blink formatting code
     - Document chanmode and statmode parameters to parse_mode_line()
     - Don't allow a digit as the first character of a nickname
