@@ -181,7 +181,7 @@ IRC formatting codes.
 =head2 C<decode_irc>
 
 This function takes a byte string (i.e. an unmodified IRC message) and
-and returns a text string. Since the source encoding might have been UTF-8,
+returns a text string. Since the source encoding might have been UTF-8,
 you should store it with UTF-8 or some other Unicode encoding in your
 file/database/whatever to be safe. For a more detailed discussion, see
 L</ENCODING>.
