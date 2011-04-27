@@ -2,7 +2,7 @@ use strict;
 use warnings FATAL => 'all';
 use Encode qw(encode);
 use IRC::Utils qw(:ALL);
-use Test::More tests => 41;
+use Test::More tests => 42;
 
 is('SIMPLE', uc_irc('simple'), 'Upper simple test');
 is('simple', lc_irc('SIMPLE'), 'Lower simple test');
@@ -17,6 +17,7 @@ ok(is_valid_nick_name( 'm00[^]' ), 'Nickname is valid test');
 ok(!is_valid_nick_name( 'm00[=]' ), 'Nickname is invalid test');
 ok(is_valid_chan_name( '#chan.nel' ), 'Channel is valid test');
 ok(!is_valid_chan_name( '#chan,nel' ), 'Channel is invalid');
+ok(!is_valid_chan_name( '#chan'.join('', ('a') x 200)), 'Channel name too long');
 
 is(unparse_mode_line('+o-v-o-o+v-o+o+o'), '+o-voo+v-o+oo', 'Unparsed mode line');
 is(gen_mode_change('ailowz','i'), '-alowz', 'Gen mode changes 1');
