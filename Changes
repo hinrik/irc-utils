@@ -1,6 +1,7 @@
 Revision history for IRC-Utils
 
 {{$NEXT}}
+    - Add a bunch of new numerics and their names
 
 0.06  Sun Apr 3 02:51:37 GMT 2011
     - Add support for the blink formatting code
