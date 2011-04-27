@@ -425,7 +425,7 @@ sub is_valid_chan_name {
     return if !defined $channel || !length $channel;
 
     return if bytes::length($channel) > 200;
-    return 1 if $channel =~ /^[$chanprefix][^ \a\0\012\015,]+$/;
+    return 1 if $channel =~ /^[$chanprefix][^ \a\0\012\015,:]+$/;
     return;
 }
 
