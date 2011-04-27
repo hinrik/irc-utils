@@ -1,6 +1,8 @@
 Revision history for IRC-Utils
 
 {{$NEXT}}
+
+0.07  Wed Apr 27 03:32:14 GMT 2011
     - Add a bunch of new numerics and their names
 
 0.06  Sun Apr 3 02:51:37 GMT 2011
