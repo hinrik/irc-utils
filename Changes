@@ -1,6 +1,8 @@
 Revision history for IRC-Utils
 
 {{$NEXT}}
+
+0.08  Mon May 9 17:33:04 GMT 2011
     - Don't allow channel names to be longer than 200 bytes
     - Don't allow colons in channel names (RFC2812 & IRCnet, though others
       are more lax)
