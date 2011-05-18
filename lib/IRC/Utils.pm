@@ -822,20 +822,23 @@ message (e.g. a channel name and a message) before sending it over the wire.
 So when you do something like C<< privmsg($channel, 'æði') >>, where
 C<$channel> is the unmodified channel name (a byte string) you got from an
 earlier IRC message, the channel name will get double-encoded when
-concatenated with your message (a non-ASCII text string) if the message
-contains non-ASCII characters.
+concatenated with your message (a non-ASCII text string) if the channel name
+contains non-ASCII bytes.
 
-To prevent this, you can't simply call L<C<decode_irc>|/decode_irc> on the
-channel name and then use it. C<'#æði'> in CP1252 is not the same channel as
-C<'#æði'> in UTF-8, since they are represented as different strings of bytes.
-The channel name and your message must therefore both be byte strings, or
-both be text strings. If they're text strings, the UTF-8 flag must be off
-for both, or on for both.
+To prevent this, you can't simply L<decode|/decode_irc> the channel name and
+then use it. C<'#æði'> in CP1252 is not the same channel as C<'#æði'> in
+UTF-8, since they are encoded as different sequences of bytes, and the IRC
+server only cares about the byte representation. Therefore, when using a
+channel name you got from the server (e.g. when replying to message), you
+should use the original byte string (before it has been decoded with
+L<C<decode_irc>|/decode_irc>), and encode any other parameters (with
+L<C<encode_utf8>|Encode>) so that your message will be concatenated
+correctly. At some point, you'll probably want to print the channel name,
+write it to a log file or use it in a filename, so you'll eventually have to
+decode it, at which point the UTF-8 C<#æði> and CP1252 C<#æði> will have to
+be considered equivalent.
 
-A simple rule to follow is to call L<C<encode_utf8>|Encode> on any part
-(channel or message) which is a text string. Here are some examples:
-
- use Encode qw(encode_utf8);
+ use Encode qw(encode_utf8 encode);
 
  sub message_handler {
      # these three are all byte strings
@@ -864,8 +867,20 @@ A simple rule to follow is to call L<C<encode_utf8>|Encode> on any part
      privmsg($channel, $msg_bytes);
 
      # good: $chan_bytes and $message are both byte strings
-     my $chan_bytes = encode_utf8('#æði');
-     privmsg($chan_bytes, $message);
+     # here we're sending a message to the utf8-encoded #æði
+     my $utf8_bytes = encode_utf8('#æði');
+     privmsg($utf8_bytes, $message);
+
+     # good: $chan_bytes and $message are both byte strings
+     # here we're sending a message to the cp1252-encoded #æði
+     my $cp1252_bytes = encode('cp1252', '#æði');
+     privmsg($cp1252_bytes, $message);
+
+     # bad: $channel is in an undetermined encoding
+     log_message("Got message from $channel");
+
+     # good: using the decoded version of $channel
+     log_message("Got message from ".decode_irc($channel));
  }
 
 See also L<Encode|Encode>, L<perluniintro|perluniintro>,
