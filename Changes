@@ -1,6 +1,8 @@
 Revision history for IRC-Utils
 
 {{$NEXT}}
+
+0.09  Fri May 20 03:22:30 GMT 2011
     - More detailed explanation of channel name encoding issues
     - Add eq_irc() convenience function
 
