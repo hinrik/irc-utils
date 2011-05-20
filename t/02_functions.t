@@ -2,7 +2,7 @@ use strict;
 use warnings FATAL => 'all';
 use Encode qw(encode);
 use IRC::Utils qw(:ALL);
-use Test::More tests => 42;
+use Test::More tests => 43;
 
 is('SIMPLE', uc_irc('simple'), 'Upper simple test');
 is('simple', lc_irc('SIMPLE'), 'Lower simple test');
@@ -12,6 +12,7 @@ is('C0MPL~[X]', uc_irc('c0mpl~[x]', 'ascii'), 'Upper complex test ascii');
 is('c0mpl^{x}', lc_irc('C0MPL^{X}', 'ascii'), 'Lower complex test ascii');
 is('C0MPL~[X]', uc_irc('c0mpl~{x}', 'strict-rfc1459'), 'Upper complex test strict');
 is('c0mpl^{x}', lc_irc('C0MPL^[X]', 'strict-rfc1459'), 'Lower complex test strict');
+ok(eq_irc('C0MPL~[X]', 'c0mpl~{x}'), 'eq_irc() considers them equivalent');
 
 ok(is_valid_nick_name( 'm00[^]' ), 'Nickname is valid test');
 ok(!is_valid_nick_name( 'm00[=]' ), 'Nickname is invalid test');

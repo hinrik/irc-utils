@@ -2,6 +2,7 @@ Revision history for IRC-Utils
 
 {{$NEXT}}
     - More detailed explanation of channel name encoding issues
+    - Add eq_irc() convenience function
 
 0.08  Mon May 9 17:33:04 GMT 2011
     - Don't allow channel names to be longer than 200 bytes

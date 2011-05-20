@@ -10,11 +10,11 @@ require Exporter;
 use base qw(Exporter);
 our @EXPORT_OK = qw(
     uc_irc lc_irc parse_mode_line parse_mask matches_mask matches_mask_array
-    unparse_mode_line gen_mode_change parse_user is_valid_nick_name decode_irc
-    is_valid_chan_name has_color has_formatting strip_color strip_formatting
-    NORMAL BOLD UNDERLINE REVERSE ITALIC FIXED WHITE BLACK BLUE GREEN RED
-    BROWN PURPLE ORANGE YELLOW LIGHT_GREEN TEAL LIGHT_CYAN LIGHT_BLUE PINK
-    GREY LIGHT_GREY numeric_to_name name_to_numeric
+    unparse_mode_line gen_mode_change parse_user is_valid_nick_name eq_irc
+    decode_irc is_valid_chan_name has_color has_formatting strip_color
+    strip_formatting NORMAL BOLD UNDERLINE REVERSE ITALIC FIXED WHITE BLACK
+    BLUE GREEN RED BROWN PURPLE ORANGE YELLOW LIGHT_GREEN TEAL LIGHT_CYAN
+    LIGHT_BLUE PINK GREY LIGHT_GREY numeric_to_name name_to_numeric
 );
 our %EXPORT_TAGS = ( ALL => [@EXPORT_OK] );
 
@@ -309,6 +309,13 @@ sub lc_irc {
     return $value;
 }
 
+sub eq_irc {
+    my ($first, $second, $type) = @_;
+    return if !defined $first || !defined $second;
+    return 1 if lc_irc($first, $type) eq lc_irc($second, $type);
+    return;
+}
+
 sub parse_mode_line {
     my @args = @_;
 
@@ -567,6 +574,8 @@ IRC::Utils - Common utilities for IRC-related tasks
  my $uppercase_nick = uc_irc($nickname);
  my $lowercase_nick = lc_irc($nickname);
 
+ print "They're equivalent\n" if eq_irc($uppercase_nick, $lowercase_nick);
+
  my $mode_line = 'ov+b-i Bob sue stalin*!*@*';
  my $hashref = parse_mode_line($mode_line);
 
@@ -610,6 +619,18 @@ Takes one mandatory parameter, a string to convert to IRC lowercase, and one
 optional parameter, the casemapping of the ircd (which can be B<'rfc1459'>,
 B<'strict-rfc1459'> or B<'ascii'>. Default is B<'rfc1459'>). Returns the IRC
 lowercase equivalent of the passed string.
+
+=head2 C<eq_irc>
+
+Takes two mandatory parameters, IRC strings (channels or nicknames) to
+compare. A third, optional parameter specifies the casemapping. Returns true
+if the two strings are equivalent, false otherwise
+
+ # long version
+ lc_irc($one, $map) eq lc_irc($two, $map)
+
+ # short version
+ eq_irc($one, $two, $map)
 
 =head2 C<parse_mode_line>
 
