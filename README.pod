@@ -21,7 +21,7 @@ IRC::Utils - Common utilities for IRC-related tasks
  my $hashref = parse_mode_line($mode_line);
 
  my $banmask = 'stalin*';
- my $full_banmask = parse_mask($banmask);
+ my $full_banmask = normalize_mask($banmask);
 
  if (matches_mask($full_banmask, 'stalin!joe@kremlin.ru')) {
      print "EEK!";
@@ -98,14 +98,14 @@ Example:
     args  => [ 'Bob', 'sue', 'stalin*!*@*' ],
  }
 
-=head2 C<parse_mask>
+=head2 C<normalize_mask>
 
 Takes one parameter, a string representing an IRC mask. Returns a normalised
 full mask.
 
 Example:
 
- $fullbanmask = parse_mask( 'stalin*' );
+ $fullbanmask = normalize_mask( 'stalin*' );
 
  # $fullbanmask will be: 'stalin*!*@*';
 

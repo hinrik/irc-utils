@@ -35,10 +35,10 @@ my $hashref3 = parse_mode_line(qw(+b -b!*@*));
 is($hashref3->{modes}->[0], '+b', 'Parse mode test 5');
 is($hashref3->{args}->[0], '-b!*@*', 'Parse mode test 6');
 
-my $partial_mask = parse_mask('*@*');
-is($partial_mask, '*!*@*', 'Parses partial mask');
+my $partial_mask = normalize_mask('*@*');
+is($partial_mask, '*!*@*', 'Normalized partial mask');
 
-my $banmask = parse_mask('stalin*');
+my $banmask = normalize_mask('stalin*');
 my $match = 'stalin!joe@kremlin.ru';
 my $no_match = 'BinGOs!foo@blah.com';
 is($banmask, 'stalin*!*@*', 'Parse ban mask test');

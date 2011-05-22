@@ -9,7 +9,7 @@ use Encode::Guess;
 require Exporter;
 use base qw(Exporter);
 our @EXPORT_OK = qw(
-    uc_irc lc_irc parse_mode_line parse_mask matches_mask matches_mask_array
+    uc_irc lc_irc parse_mode_line normalize_mask matches_mask matches_mask_array
     unparse_mode_line gen_mode_change parse_user is_valid_nick_name eq_irc
     decode_irc is_valid_chan_name has_color has_formatting strip_color
     strip_formatting NORMAL BOLD UNDERLINE REVERSE ITALIC FIXED WHITE BLACK
@@ -362,7 +362,7 @@ sub parse_mode_line {
     return $hashref;
 }
 
-sub parse_mask {
+sub normalize_mask {
     my ($arg) = @_;
     return if !defined $arg;
 
@@ -578,7 +578,7 @@ IRC::Utils - Common utilities for IRC-related tasks
  my $hashref = parse_mode_line($mode_line);
 
  my $banmask = 'stalin*';
- my $full_banmask = parse_mask($banmask);
+ my $full_banmask = normalize_mask($banmask);
 
  if (matches_mask($full_banmask, 'stalin!joe@kremlin.ru')) {
      print "EEK!";
@@ -655,14 +655,14 @@ Example:
     args  => [ 'Bob', 'sue', 'stalin*!*@*' ],
  }
 
-=head2 C<parse_mask>
+=head2 C<normalize_mask>
 
 Takes one parameter, a string representing an IRC mask. Returns a normalised
 full mask.
 
 Example:
 
- $fullbanmask = parse_mask( 'stalin*' );
+ $fullbanmask = normalize_mask( 'stalin*' );
 
  # $fullbanmask will be: 'stalin*!*@*';
 
