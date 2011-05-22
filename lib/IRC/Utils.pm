@@ -371,6 +371,7 @@ sub parse_mask {
     my $remainder;
     if ($arg !~ /!/ and $arg =~ /@/) {
         $remainder = $arg;
+        $mask[0] = '*';
     }
     else {
         ($mask[0], $remainder) = split /!/, $arg, 2;
@@ -381,7 +382,7 @@ sub parse_mask {
     $mask[2] =~ s/@//g if defined $mask[2];
 
     for my $i (1..2) {
-        $mask[$i] = '*' if !$mask[$i];
+        $mask[$i] = '*' if !defined $mask[$i];
     }
     return $mask[0] . '!' . $mask[1] . '@' . $mask[2];
 }
