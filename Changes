@@ -2,6 +2,7 @@ Revision history for IRC-Utils
 
 {{$NEXT}}
     - Fix failure in parse_mask() when the mask doesn't contain '!'
+    - matches_mask(): Don't call parse_mask() on the argument first
 
 0.09  Fri May 20 03:22:30 GMT 2011
     - More detailed explanation of channel name encoding issues

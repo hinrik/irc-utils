@@ -461,9 +461,6 @@ sub matches_mask {
     return if !defined $mask || !length $mask;
     return if !defined $match || !length $match;
 
-    $mask = parse_mask($mask);
-    $mask =~ s/\*+/*/g;
-
     my $umask = quotemeta uc_irc($mask, $mapping);
     $umask =~ s/\\\*/[\x01-\xFF]{0,}/g;
     $umask =~ s/\\\?/[\x01-\xFF]{1,1}/g;
@@ -671,12 +668,11 @@ Example:
 
 =head2 C<matches_mask>
 
-Takes two parameters, a string representing an IRC mask (it'll be processed
-with L<C<parse_mask>|/parse_mask> to ensure that it is normalised)
-and something to match against the IRC mask, such as a nick!user@hostname
-string. Returns a true value if they match, a false value otherwise.
-Optionally, one may pass the casemapping (see L<C<uc_irc>|/uc_irc>), as this
-function uses C<uc_irc> internally.
+Takes two parameters, a string representing an IRC mask and something to
+match against the IRC mask, such as a nick!user@hostname string. Returns
+a true value if they match, a false value otherwise. Optionally, one may
+pass the casemapping (see L<C<uc_irc>|/uc_irc>), as this function uses
+C<uc_irc> internally.
 
 =head2 C<matches_mask_array>
 
