@@ -1,6 +1,8 @@
 Revision history for IRC-Utils
 
 {{$NEXT}}
+
+0.11  Fri Jul 29 01:36:51 GMT 2011
     - Fix typo causing numerics 333 and 338 to get mixed up
     - Add numerics 307 and 310, used by the Rizon network (hybrid+Plexus)
 
