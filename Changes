@@ -1,6 +1,7 @@
 Revision history for IRC-Utils
 
 {{$NEXT}}
+    - Fix typo causing numerics 333 and 338 to get mixed up
 
 0.10  Sun May 22 16:12:50 GMT 2011
     - Fix failure in parse_mask() when the mask doesn't contain '!'
