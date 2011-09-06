@@ -910,9 +910,9 @@ L<perlunifaq|perlunifaq>.
 
 =head1 AUTHOR
 
-Chris C<BinGOs> Williams <chris@bingosnet.co.uk>
+Hinrik E<Ouml>rn SigurE<eth>sson <hinrik.sig@gmail.com> (C<Hinrik> irc.perl.org, or C<literal> @ FreeNode).
 
-Hinrik E<Ouml>rn SigurE<eth>sson <hinrik.sig@gmail.com>
+Chris C<BinGOs> Williams <chris@bingosnet.co.uk>
 
 =head1 SEE ALSO
 
