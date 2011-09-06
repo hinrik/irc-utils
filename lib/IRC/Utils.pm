@@ -821,29 +821,30 @@ as well.
 
 =head2 Messages
 
-The only encoding requirement the IRC protocol places on its messages is that
-they be 8-bits and ASCII-compatible. This has resulted in most of the Western
-world settling on ASCII-compatible Latin-1 (usually Microsoft's CP1252, a
-Latin-1 variant) as a convention. Recently, popular IRC clients (mIRC, xchat,
-certain irssi configurations) have begun sending a mixture of CP1252 and UTF-8
-over the wire to allow more characters without breaking backward compatibility
-(too much). They send CP1252 encoded messages if the characters fit within
-that encoding, otherwise falling back to UTF-8, and likewise autodetecting
-the encoding (UTF-8 or CP1252) of incoming messages. Since writing text with
-mixed encoding to a file, terminal, or database is not a good idea, you need
-a way to decode messages from IRC. L<C<decode_irc>|/decode_irc> will do that.
+The only encoding requirement the IRC protocol places on its messages is
+that they be 8-bits and ASCII-compatible. This has resulted in most of the
+Western world settling on ASCII-compatible Latin-1 (usually Microsoft's
+CP1252, a Latin-1 variant) as a convention. Recently, popular IRC clients
+(mIRC, xchat, certain irssi configurations) have begun sending a mixture of
+CP1252 and UTF-8 over the wire to allow more characters without breaking
+backward compatibility (too much). They send CP1252 encoded messages if the
+characters fit within that encoding, otherwise falling back to UTF-8, and
+likewise autodetecting the encoding (UTF-8 or CP1252) of incoming messages.
+Since writing text with mixed encoding to a file, terminal, or database is
+not a good idea, you need a way to decode messages from IRC.
+L<C<decode_irc>|/decode_irc> will do that.
 
 =head2 Channel names
 
 The matter is complicated further by the fact that some servers allow
-non-ASCII characters in channel names. IRC modules generally don't explicitly
-encode or decode any IRC traffic, but they do have to concatenate parts of a
-message (e.g. a channel name and a message) before sending it over the wire.
-So when you do something like C<< privmsg($channel, 'æði') >>, where
-C<$channel> is the unmodified channel name (a byte string) you got from an
-earlier IRC message, the channel name will get double-encoded when
-concatenated with your message (a non-ASCII text string) if the channel name
-contains non-ASCII bytes.
+non-ASCII characters in channel names. IRC modules generally don't
+explicitly encode or decode any IRC traffic, but they do have to
+concatenate parts of a message (e.g. a channel name and a message) before
+sending it over the wire. So when you do something like
+C<< privmsg($channel, 'æði') >>, where C<$channel> is the unmodified
+channel name (a byte string) you got from an earlier IRC message, the
+channel name will get double-encoded when concatenated with your message (a
+non-ASCII text string) if the channel name contains non-ASCII bytes.
 
 To prevent this, you can't simply L<decode|/decode_irc> the channel name and
 then use it. C<'#æði'> in CP1252 is not the same channel as C<'#æði'> in
