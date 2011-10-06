@@ -1,6 +1,8 @@
 Revision history for IRC-Utils
 
 {{$NEXT}}
+
+0.12  Thu Oct 6 20:48:17 GMT 2011
     - strip_formatting(): Only strip cancellation codes if there are no
       color codes in the string
 
