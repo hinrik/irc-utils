@@ -2,7 +2,7 @@ use strict;
 use warnings FATAL => 'all';
 use Encode qw(encode);
 use IRC::Utils qw(:ALL);
-use Test::More tests => 44;
+use Test::More tests => 46;
 
 is('SIMPLE', uc_irc('simple'), 'Upper simple test');
 is('simple', lc_irc('SIMPLE'), 'Lower simple test');
@@ -67,6 +67,12 @@ my $formatted = "This is \x02bold\x0f and this is \x1funderlined\x0f";
 ok(has_formatting($formatted), 'Has Formatting Test');
 my $stripped = strip_formatting($formatted);
 is($stripped, 'This is bold and this is underlined', 'Strip Formatting Test');
+
+my $form_color = "Foo \x0305\x02bar\x0f baz";
+my $no_color = strip_color($form_color);
+my $no_form = strip_formatting($form_color);
+is($no_color, "Foo \x02bar\x0f baz", "Only stripped colors");
+is($no_form, "Foo \x0305bar\x0f baz", "Only stripped formatting");
 
 my $string = "l\372\360i";
 my $cp1252_bytes = encode('cp1252', $string);

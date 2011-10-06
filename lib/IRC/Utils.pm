@@ -516,7 +516,7 @@ sub strip_color {
 sub strip_formatting {
     my ($string) = @_;
     return if !defined $string;
-    $string =~ s/[\x0f\x02\x1f\x16\x1d\x11\x06]//g;
+    $string =~ s/[\x02\x1f\x16\x1d\x11\x06]//g;
 
     # strip cancellation codes too if there are no color codes
     $string =~ s/\x0f//g if !has_color($string);

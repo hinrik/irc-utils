@@ -1,6 +1,8 @@
 Revision history for IRC-Utils
 
 {{$NEXT}}
+    - strip_formatting(): Only strip cancellation codes if there are no
+      color codes in the string
 
 0.11  Fri Jul 29 01:36:51 GMT 2011
     - Fix typo causing numerics 333 and 338 to get mixed up
