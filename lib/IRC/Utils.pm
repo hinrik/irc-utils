@@ -754,7 +754,7 @@ IRC formatting codes.
 
 This function takes a byte string (i.e. an unmodified IRC message) and
 returns a text string. Since the source encoding might have been UTF-8,
-you should store it with UTF-8 or some other Unicode encoding in your
+you should store it in UTF-8 or some other Unicode encoding in your
 file/database/whatever to be safe. For a more detailed discussion, see
 L</ENCODING>.
 
@@ -910,7 +910,7 @@ L<perlunifaq|perlunifaq>.
 
 =head1 AUTHOR
 
-Hinrik E<Ouml>rn SigurE<eth>sson <hinrik.sig@gmail.com> (C<Hinrik> irc.perl.org, or C<literal> @ FreeNode).
+Hinrik E<Ouml>rn SigurE<eth>sson <hinrik.sig@gmail.com> (C<Hinrik> on irc.perl.org, or C<literal> on FreeNode).
 
 Chris C<BinGOs> Williams <chris@bingosnet.co.uk>
 
