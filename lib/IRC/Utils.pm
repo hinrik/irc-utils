@@ -822,14 +822,16 @@ as well.
 =head2 Messages
 
 The only encoding requirement the IRC protocol places on its messages is
-that they be 8-bits and ASCII-compatible. This has resulted in most of the
-Western world settling on ASCII-compatible Latin-1 (usually Microsoft's
-CP1252, a Latin-1 variant) as a convention. Recently, popular IRC clients
-(mIRC, xchat, certain irssi configurations) have begun sending a mixture of
-CP1252 and UTF-8 over the wire to allow more characters without breaking
-backward compatibility (too much). They send CP1252 encoded messages if the
-characters fit within that encoding, otherwise falling back to UTF-8, and
-likewise autodetecting the encoding (UTF-8 or CP1252) of incoming messages.
+that they be 8-bit and ASCII-compatible. This has resulted in most of the
+Western world settling on Latin-1 (usually Microsoft's CP1252, a Latin-1
+variant) as a convention. Recently, popular IRC clients (mIRC, xchat, certain
+irssi configurations) have begun sending a mixture of CP1252 and UTF-8 over
+the wire to allow a wider range of characters without breaking backward
+compatibility (too much). They still send CP1252-encoded messages if they
+fit within that encoding, otherwise they will be encoded as UTF-8. Likewise,
+they automatically detect the encoding of incoming messages; as UTF-8 if the
+bytes are valid UTF-8, otherwise falling back to CP1252.
+
 Since writing text with mixed encoding to a file, terminal, or database is
 not a good idea, you need a way to decode messages from IRC.
 L<C<decode_irc>|/decode_irc> will do that.
