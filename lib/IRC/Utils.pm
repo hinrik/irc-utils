@@ -862,6 +862,7 @@ decode it, at which point the UTF-8 C<#æði> and CP1252 C<#æði> will have to
 be considered equivalent.
 
  use Encode qw(encode_utf8 encode);
+ use IRC::Utils qw(decode_irc);
 
  sub message_handler {
      # these three are all byte strings
