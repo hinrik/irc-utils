@@ -561,7 +561,7 @@ sub _diff {
 
 =head1 NAME
 
-IRC::Utils - Common utilities for IRC-related tasks
+IRC::Utils - Utilities for IRC-related tasks
 
 =head1 SYNOPSIS
 
